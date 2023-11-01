@@ -1,0 +1,27 @@
+<div>
+    <h1>Klanten</h1>
+
+
+
+    <section *ngIf="(allClients$ | async) as state" class="todo-list">
+        <div *ngIf="(allClientsStatus$) | async as status" class="todo-list__status">
+            <div *ngIf="status === 'loading'">Laden...</div>
+            <div *ngIf="status === 'success'">
+                <p style="color:green;">{{allClientsNotification$ | async}}</p>
+            </div>
+            <div *ngIf="status === 'error'">
+                <p style="color:red;">{{allClientsNotification$ | async}}</p>
+            </div>
+        </div>
+        <div *ngFor="let client of allClients$ | async ">
+            {{client.name}} <button (click)="removeClient(client.id!)">Verwijderen</button>
+        </div>
+    </section>
+
+
+    <section>
+
+        <h3>Random klant toevoegen</h3>
+        <button (click)="addClient()">Toevoegen</button>
+    </section>
+</div>
