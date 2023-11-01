@@ -13,7 +13,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideEffects(),
     provideStore(),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
     provideStoreDevtools(),
     provideHttpClient(),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),

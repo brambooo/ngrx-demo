@@ -11,4 +11,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('./domains/invoices/').then((m) => m.FEATURE_INVOICES_ROUTES),
   },
+  {
+    path: 'todos',
+    loadChildren: () =>
+      import('./domains/todos/').then((m) => m.FEATURE_TODOS_ROUTES),
+  },
 ];
