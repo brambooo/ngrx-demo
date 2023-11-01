@@ -3,6 +3,15 @@ import { ClientsEntity } from './clients.models';
 
 export const loadClients = createAction('[Clients Page] Loading Clients');
 
+export const loadClientsSuccess = createAction(
+  '[Clients/API] Load Clients Success',
+  props<{ clients: ClientsEntity[] }>(),
+);
+
+export const loadClientsFailure = createAction(
+  '[Clients/API] Load Clients Failure',
+);
+
 export const addClient = createAction(
   '[Clients/API] Add Client',
   props<{ client: ClientsEntity }>(),
@@ -31,14 +40,4 @@ export const removeClientSuccess = createAction(
 export const removeClientFailure = createAction(
   '[Clients/API] Remove Client Failure',
   props<{ clientId: number }>(),
-);
-
-export const loadClientsSuccess = createAction(
-  '[Clients/API] Load Clients Success',
-  props<{ clients: ClientsEntity[] }>(),
-);
-
-export const loadClientsFailure = createAction(
-  '[Clients/API] Load Clients Failure',
-  props<{ error: any }>(),
 );

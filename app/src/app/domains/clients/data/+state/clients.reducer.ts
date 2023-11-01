@@ -8,6 +8,7 @@ export const CLIENTS_FEATURE_KEY = 'clients';
 
 export type StateStatus = 'pending' | 'loading' | 'error' | 'success';
 
+// Waarom extends gebruiken (generated via nx nu)
 export interface ClientsState extends EntityState<ClientsEntity> {
   selectedId?: string | number; // which Clients record has been selected
   clients: ClientsEntity[];
@@ -63,36 +64,34 @@ const reducer = createReducer(
   // Add the new client to the clients array
   on(ClientsActions.addClient, (state, { client }) => ({
     ...state,
-    loading: true,
+    status: 'loading' as StateStatus,
+    notification: null,
   })),
   on(ClientsActions.addClientSuccess, (state, { client }) => ({
     ...state,
-    loading: false,
     status: 'success' as StateStatus,
     notification: 'Klant succesvol toegevoegd.',
     clients: [...state.clients, client],
   })),
   on(ClientsActions.addClientFailure, (state, { client }) => ({
     ...state,
-    loading: false,
     status: 'error' as StateStatus,
     notification: 'Fout bij het toevoegen van een klant.',
   })),
   // Remove the client from the clients list
   on(ClientsActions.removeClient, (state, { clientId }) => ({
     ...state,
-    loading: true,
+    status: 'loading' as StateStatus,
+    notification: null,
   })),
   on(ClientsActions.removeClientSuccess, (state, { clientId }) => ({
     ...state,
-    loading: false,
     status: 'success' as StateStatus,
     notification: 'Klant succesvol verwijderd.',
     clients: state.clients.filter((client) => client.id === clientId),
   })),
   on(ClientsActions.removeClientFailure, (state, { clientId }) => ({
     ...state,
-    loading: false,
     status: 'error' as StateStatus,
     notification: 'Fout bij het verwijderen van een klant',
   })),
