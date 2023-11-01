@@ -10,6 +10,7 @@ export const loadClientsSuccess = createAction(
 
 export const loadClientsFailure = createAction(
   '[Clients/API] Load Clients Failure',
+  props<{ error: any }>(),
 );
 
 export const addClient = createAction(
