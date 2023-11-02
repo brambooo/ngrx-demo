@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import {
@@ -10,13 +15,15 @@ import {
   selectAllClientsNotification,
 } from '../data';
 import { ClientsEntity } from '../data/+state/clients.models';
+import { AddClientFormComponent } from '../ui/add-client-form.component';
 
 @Component({
   selector: 'app-clients-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddClientFormComponent],
   templateUrl: './clients-page.component.html',
   styleUrls: ['./clients-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientsPageComponent implements OnInit {
   private readonly _store = inject(Store);
@@ -30,13 +37,14 @@ export class ClientsPageComponent implements OnInit {
     this._store.dispatch(loadClients());
   }
 
-  addClient(): void {
-    console.log('Add client called!');
-    const random = Math.floor(Math.random() * 1000);
-    const name = 'Random_' + random;
-    const email = 'email_' + random;
+  addClient(client: ClientsEntity): void {
+    if (!client) return;
+    console.log('Add client called!', client);
+    // const random = Math.floor(Math.random() * 1000);
+    // const name = 'Random_' + random;
+    // const email = 'email_' + random;
 
-    const client: ClientsEntity = { name, email };
+    // const client: ClientsEntity = { name, email };
     this._store.dispatch(addClient({ client }));
   }
 

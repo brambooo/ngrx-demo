@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { selectAllClients } from '../../clients';
 
 @Component({
   selector: 'app-invoices-page',
@@ -8,4 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './invoices-page.component.html',
   styleUrls: ['./invoices-page.component.scss'],
 })
-export class InvoicesPageComponent {}
+export class InvoicesPageComponent {
+  private readonly _store = inject(Store);
+  readonly allClients$ = this._store.select(selectAllClients);
+}

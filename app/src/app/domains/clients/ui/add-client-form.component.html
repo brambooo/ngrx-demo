@@ -1,0 +1,18 @@
+<form [formGroup]="clientForm" (ngSubmit)="handleSubmit()">
+    <div class="mb-6">
+        <label for="title">
+            Naam
+        </label>
+        <input formControlName="name" type="text" id="name" />
+    </div>
+    <div class="mb-6">
+        <label for="content">
+            Email
+        </label>
+        <input formControlName="mail" type="text" id="mail" />
+    </div>
+
+    <button type="submit">
+        Submit
+    </button>
+</form>

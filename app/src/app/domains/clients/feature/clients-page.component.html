@@ -1,8 +1,6 @@
 <div>
     <h1>Klanten</h1>
 
-
-
     <section *ngIf="(allClients$ | async) as state" class="todo-list">
         <div *ngIf="(allClientsStatus$) | async as status" class="todo-list__status">
             <div *ngIf="status === 'loading'">Laden...</div>
@@ -20,7 +18,8 @@
 
 
     <section>
-        <h3>Random klant toevoegen</h3>
-        <button (click)="addClient()">Toevoegen</button>
+        <h2>Klant toevoegen</h2>
+        <app-add-client-form (save)="addClient($event)"></app-add-client-form>
     </section>
+
 </div>
