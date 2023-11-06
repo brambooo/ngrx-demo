@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { ClientsEntity } from '../data/+state/clients.models';
+import { Client } from '../../shared/models/state/client';
 
 @Component({
   selector: 'app-add-client-form',
@@ -19,7 +19,7 @@ import { ClientsEntity } from '../data/+state/clients.models';
 })
 export class AddClientFormComponent {
   private readonly _fb = inject(FormBuilder);
-  @Output() save = new EventEmitter<ClientsEntity>();
+  @Output() save = new EventEmitter<Client>();
 
   readonly clientForm = this._fb.nonNullable.group({
     name: '',

@@ -2,17 +2,15 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ClientsActions from './clients.actions';
-import { ClientsEntity } from './clients.models';
+import { StateStatus } from '../../../shared/models/state';
+import { Client } from '../../../shared/models/state/client';
 
 export const CLIENTS_FEATURE_KEY = 'clients';
 
-export type StateStatus = 'pending' | 'loading' | 'error' | 'success';
-
 // Waarom extends gebruiken (generated via nx nu)
-export interface ClientsState extends EntityState<ClientsEntity> {
+export interface ClientsState extends EntityState<Client> {
   selectedId?: string | number; // which Clients record has been selected
-  clients: ClientsEntity[];
-  // loaded: boolean; // has the Clients list been loaded
+  clients: Client[];
   status: StateStatus;
   notification?: string | null; // last known error (if any)
 }
@@ -21,8 +19,8 @@ export interface ClientsPartialState {
   readonly [CLIENTS_FEATURE_KEY]: ClientsState;
 }
 
-export const clientsAdapter: EntityAdapter<ClientsEntity> =
-  createEntityAdapter<ClientsEntity>();
+export const clientsAdapter: EntityAdapter<Client> =
+  createEntityAdapter<Client>();
 
 export const initialClientsState: ClientsState = clientsAdapter.getInitialState(
   {
@@ -94,6 +92,14 @@ const reducer = createReducer(
     ...state,
     status: 'error' as StateStatus,
     notification: 'Fout bij het verwijderen van een klant',
+  })),
+  on(ClientsActions.selectClient, (state, { clientId }) => ({
+    ...state,
+    selectedId: clientId,
+  })),
+  on(ClientsActions.clearSelectedClient, (state, { clientId }) => ({
+    ...state,
+    selectedId: undefined,
   })),
 );
 

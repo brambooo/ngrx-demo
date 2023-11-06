@@ -4,6 +4,7 @@ import {
   ClientsState,
   clientsAdapter,
 } from './clients.reducer';
+import { Client } from '../../../shared/models/state/client';
 
 // Lookup the 'Clients' feature state managed by NgRx
 export const selectClientsState =
@@ -24,4 +25,22 @@ export const selectAllClientsStatus = createSelector(
 export const selectAllClientsNotification = createSelector(
   selectClientsState,
   (state) => state.notification,
+);
+
+export const selectSelectedId = createSelector(
+  selectClientsState,
+  (state: ClientsState) => state.selectedId,
+);
+
+export const selectSelectedClient = createSelector(
+  selectAllClients,
+  selectSelectedId,
+  (clients, selectedId) => {
+    if (clients && selectedId) {
+      return clients.find(
+        (client: Client) => client.id === (selectedId as number),
+      );
+    }
+    return undefined;
+  },
 );

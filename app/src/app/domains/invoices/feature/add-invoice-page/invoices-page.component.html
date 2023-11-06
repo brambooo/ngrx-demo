@@ -1,0 +1,25 @@
+<div>
+    <h1>Facturen</h1>
+
+    <section *ngIf="(invoices$ | async) as state" class="todo-list">
+        <div *ngIf="(invoicesStatus$) | async as status" class="todo-list__status">
+            <div *ngIf="status === 'loading'">Laden...</div>
+            <div *ngIf="status === 'success'">
+                <p style="color:green;">{{invoicesNotification$ | async}}</p>
+            </div>
+            <div *ngIf="status === 'error'">
+                <p style="color:red;">{{invoicesNotification$ | async}}</p>
+            </div>
+        </div>
+        <div *ngFor="let invoice of invoices$ | async ">
+            {{invoice.name}} <button (click)="removeInvoice(invoice.id!)">Verwijderen</button>
+        </div>
+    </section>
+
+
+
+    <div>
+        <h2>We kunnen ook mooi de klanten state hier gebruiken</h2>
+        {{allClients$ | async | json}}
+    </div>
+</div>

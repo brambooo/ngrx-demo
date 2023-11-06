@@ -1,0 +1,17 @@
+<div>
+    <h1>Factuur toevoegen</h1>
+
+    <div>
+        <app-client-dropdown [clients]="(clients$ | async)!" (clientSelected)="handleClientSelected($event)"></app-client-dropdown>
+
+        <section>
+            <h2>Factuur maken</h2>
+
+            <div> selectedClient: {{selectedClient$ | async }} </div>
+            <div> Status: {{status$ | async }} </div>
+            <div> notification: {{notification$ | async }} </div>
+
+            <button (click)="handleSaveInvoice()">Toevoegen</button>
+        </section>
+    </div>
+</div>

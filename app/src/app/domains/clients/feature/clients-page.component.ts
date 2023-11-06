@@ -14,8 +14,8 @@ import {
   selectAllClientsStatus,
   selectAllClientsNotification,
 } from '../data';
-import { ClientsEntity } from '../data/+state/clients.models';
 import { AddClientFormComponent } from '../ui/add-client-form.component';
+import { Client } from '../../shared/models/state/client';
 
 @Component({
   selector: 'app-clients-page',
@@ -37,7 +37,7 @@ export class ClientsPageComponent implements OnInit {
     this._store.dispatch(loadClients());
   }
 
-  addClient(client: ClientsEntity): void {
+  addClient(client: Client): void {
     if (!client) return;
     console.log('Add client called!', client);
     // const random = Math.floor(Math.random() * 1000);

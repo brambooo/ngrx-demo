@@ -3,8 +3,8 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { catchError, of, map, Observable, exhaustMap, mergeMap } from 'rxjs';
 import * as ClientsActions from './clients.actions';
 import { ClientService } from '../client-service';
-import { ClientsEntity } from './clients.models';
 import { Action } from '@ngrx/store';
+import { Client } from '../../../shared/models/state/client';
 
 @Injectable()
 export class ClientsEffects {
@@ -24,7 +24,7 @@ export class ClientsEffects {
         ),
         exhaustMap(() =>
           this._clientService.getAll().pipe(
-            map((clients: ClientsEntity[]) =>
+            map((clients: Client[]) =>
               ClientsActions.loadClientsSuccess({ clients }),
             ),
             catchError((error) => {

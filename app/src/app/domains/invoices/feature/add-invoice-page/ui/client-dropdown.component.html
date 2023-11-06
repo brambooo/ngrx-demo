@@ -1,0 +1,6 @@
+<label for="clients">Kies een klant:</label>
+<select [(ngModel)]="selectedClientId" (change)="handleClientSelected()" id="client-dropdown" for="clients">
+    <option *ngFor="let client of clients" [value]="client.id">
+        {{ client.name }}
+    </option>
+</select>
